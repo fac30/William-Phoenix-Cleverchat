@@ -3,10 +3,7 @@ const fs = require("node:fs"); //file system module for intereacting with files
 const path = require("node:path"); //path module for working with directory paths
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const { config } = require("dotenv");
-const express = require('express');
 
-const app = express();
-const port = 3000;
 
 config(); // Load environment variables from .env file
 
