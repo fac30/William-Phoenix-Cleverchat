@@ -4,8 +4,8 @@ const path = require("node:path"); //path module for working with directory path
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const { config } = require("dotenv");
 
-// Load environment variables from .env file
-config();
+
+config(); // Load environment variables from .env file
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -75,3 +75,10 @@ client.once(Events.ClientReady, (readyClient) => {
 
 // Log in to Discord with your client's token from the environment variable
 client.login(process.env.DISCORD_TOKEN);
+
+
+
+
+
+
+
