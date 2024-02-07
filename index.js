@@ -74,3 +74,10 @@ client.once(Events.ClientReady, (readyClient) => {
 
 // Log in to Discord with your client's token from the environment variable
 client.login(process.env.DISCORD_TOKEN);
+
+
+
+
+
+
+
