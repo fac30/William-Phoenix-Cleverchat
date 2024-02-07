@@ -3,6 +3,7 @@ const fs = require("node:fs"); //file system module for intereacting with files
 const path = require("node:path"); //path module for working with directory paths
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const { config } = require("dotenv");
+const express = require('express');
 
 const app = express();
 const port = 3000;
@@ -77,3 +78,10 @@ client.once(Events.ClientReady, (readyClient) => {
 
 // Log in to Discord with your client's token from the environment variable
 client.login(process.env.DISCORD_TOKEN);
+
+
+
+
+
+
+
