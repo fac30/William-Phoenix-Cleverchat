@@ -7,7 +7,14 @@ const { config } = require("dotenv");
 config(); // Load environment variables from .env file
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+  ],
+});
 client.commands = new Collection(); // accessing commands from other files; stores and retrieve commands for execution.
 
 const foldersPath = path.join(__dirname, "commands"); // path to commands folder;
@@ -34,43 +41,20 @@ for (const folder of commandFolders) {
   }
 }
 
-// Receiving command interactions
+const eventsPath = path.join(__dirname, "events");
+const eventFiles = fs
+  .readdirSync(eventsPath)
+  .filter((file) => file.endsWith(".js"));
 
-client.on(Events.InteractionCreate, async (interaction) => {
-  if (!interaction.isChatInputCommand()) return; // returns boolean; checks whether interaction is a chat command.
-
-  const command = interaction.client.commands.get(interaction.commandName); // finds matching command in the client.commands collection based on the interaction.commandName recieved
-  if (!command) {
-    console.error(`No command matching ${interaction.commandName} was found.`);
-    return; // console log error if there is no matching command name
+for (const file of eventFiles) {
+  const filePath = path.join(eventsPath, file);
+  const event = require(filePath);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args));
   }
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    console.error(error);
-    if (interaction.replied || interaction.deferred) {
-      await interaction.followUp({
-        content: "There was an  error while executing this command!",
-        ephemeral: true,
-      });
-    } else {
-      await interaction.reply({
-        content: "There was an  error while executing this command!",
-        ephemeral: true,
-      });
-    }
-  }
-});
-
-// Executing commands
-
-// When the client is ready, run this code (only once).
-// The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
-// It makes some properties non-nullable.
-client.once(Events.ClientReady, (readyClient) => {
-  console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-});
+}
 
 // Log in to Discord with your client's token from the environment variable
 client.login(process.env.DISCORD_TOKEN);
