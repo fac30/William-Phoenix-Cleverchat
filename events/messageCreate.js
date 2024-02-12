@@ -1,7 +1,7 @@
 const { Events, Client } = require("discord.js");
 
 module.exports = {
-  name: "test",
+  name: Events.MessageCreate,
   async execute(interaction) {
     if (interaction.author.username && !interaction.author.bot) {
       console.log(interaction);
