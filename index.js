@@ -1,8 +1,14 @@
 // Require the necessary discord.js classes
 const fs = require("node:fs"); //file system module for intereacting with files
 const path = require("node:path"); //path module for working with directory paths
-const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
+const {
+  Client,
+  Collection,
+  GatewayIntentBits,
+  Partials,
+} = require("discord.js");
 const { config } = require("dotenv");
+const { Channel } = require("node:diagnostics_channel");
 
 config(); // Load environment variables from .env file
 
@@ -13,7 +19,9 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.DirectMessages,
   ],
+  partials: [Partials.Channel, Partials.Message],
 });
 client.commands = new Collection(); // accessing commands from other files; stores and retrieve commands for execution.
 
