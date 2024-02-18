@@ -41,7 +41,7 @@ module.exports = {
           try {
 
             await interaction.deferReply();
-            // Send the user's input to the OpenAI API
+            // Send the user's input to the OpenAIAPI
               const response = await openai.chat.completions.create({
                 messages: [{ role: 'user', content: userMessage }],
                 model: 'gpt-3.5-turbo',
