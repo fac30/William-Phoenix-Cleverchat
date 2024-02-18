@@ -10,6 +10,7 @@ const {
 const { config } = require("dotenv");
 const { Channel } = require("node:diagnostics_channel");
 
+
 config(); // Load environment variables from .env file
 
 // Create a new client instance
