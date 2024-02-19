@@ -7,6 +7,7 @@ const { Configuration, OpenAIApi } = require('openai');
 
 
 
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // This is also the default, can be omitted
   model: 'gpt-3.5-turbo'
@@ -21,7 +22,9 @@ module.exports = {
     .setName("ask")
     .setDescription("Replies with Pong!")
     .addStringOption(option =>
-      option.setName('input').setDescription('Testing input').setRequired(true)),
+      option.setName('input')
+        .setDescription('Testing input')
+        .setRequired(true)),
       
         async execute(interaction) {
           console.log('Raw Interaction Data:', interaction.toJSON());
@@ -64,82 +67,3 @@ module.exports = {
       }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// module.exports = {
-//   data: new SlashCommandBuilder()
-//     .setName("ask")
-//     .setDescription("Ask the bot a question."),
-    
-//   async execute(interaction) {
-//     // Get the user's question from the interaction
-//     const userQuestion = interaction.options.getString('question');
-//     console.log(userQuestion);
-//     // Generate a response using OpenAI
-//     const openaiResponse = await generateOpenAIResponse(userQuestion);
-
-//     // Reply to the user with the OpenAI-generated response
-//     await interaction.reply(openaiResponse);
-//   },
-// };
-
-// async function generateOpenAIResponse(userQuestion) {
-//     try {
-
-  
-//       // Use OpenAI API to generate a response based on the user's question
-//       const response = await openai.chat.completions.create({
-//         model: 'gpt-3.5-turbo',
-//         prompt: `User: ${userQuestion}\nBot:`,
-//         max_tokens: 100,
-//       });
-  
-//       console.log("OpenAI API Response:", response);
-  
-//       // Extract the generated response from OpenAI's API response
-//       const generatedResponse = response.choices[0].text.trim();
-  
-//       return generatedResponse;
-//     } catch (error) {
-//       console.error("Error generating OpenAI response:", error);
-//       return "Sorry, I couldn't generate a response at the moment.";
-//     }
-//   }
