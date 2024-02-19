@@ -7,6 +7,7 @@ const { Configuration, OpenAIApi } = require('openai');
 
 
 
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // This is also the default, can be omitted
   model: 'gpt-3.5-turbo'
@@ -21,7 +22,9 @@ module.exports = {
     .setName("ask")
     .setDescription("Replies with Pong!")
     .addStringOption(option =>
-      option.setName('input').setDescription('Testing input').setRequired(true)),
+      option.setName('input')
+        .setDescription('Testing input')
+        .setRequired(true)),
       
         async execute(interaction) {
           console.log('Raw Interaction Data:', interaction.toJSON());
