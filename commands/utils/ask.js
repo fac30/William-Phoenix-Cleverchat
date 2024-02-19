@@ -25,6 +25,8 @@ module.exports = {
       
         async execute(interaction) {
           console.log('Raw Interaction Data:', interaction.toJSON());
+          
+          //Ensures that the interaction is a command
 
           if (!interaction.isCommand()) return;
 
@@ -39,7 +41,7 @@ module.exports = {
           }
         
           try {
-
+            //Defers user input allowing for OpenAI to take longer than 3 seconds to respond
             await interaction.deferReply();
             // Send the user's input to the OpenAIAPI
               const response = await openai.chat.completions.create({
@@ -60,29 +62,6 @@ module.exports = {
           }
         }
       }
-
-// module.exports = {
-//   data: new SlashCommandBuilder()
-//   .setName('ask')
-// 	.setDescription('Replies with your input!')
-// 	.addUserOption(option =>
-// 		option.setName('usertest')
-// 			.setDescription('The input to echo back')
-// 			.setRequired(true))
-//   .addStringOption(option =>
-//     option.setName('testinput')
-//       .setDescription('Testing input')
-
-//     ),
-
-//       async execute(interaction) {
-
-//         const userQuestion = interaction.options.getString('input');
-//        console.log(interaction);
-//       }
-
-
-// }
 
 
 
