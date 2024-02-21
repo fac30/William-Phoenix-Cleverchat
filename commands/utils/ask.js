@@ -4,17 +4,10 @@ require('dotenv').config();
 const { Configuration, OpenAIApi } = require('openai');
 
 
-
-
-
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // This is also the default, can be omitted
   model: 'gpt-3.5-turbo'
 });
-
-
-
 
 
 module.exports = {
@@ -52,8 +45,6 @@ module.exports = {
                 model: 'gpt-3.5-turbo',
               });
               
-            
-        
             // Get the generated response from OpenAI
             const botResponse = response.choices[0].message;
         

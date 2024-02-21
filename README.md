@@ -8,6 +8,48 @@ with messages from the OpenAI API.
 
 ===
 
+To setup this project locally, you will need to fork the repository. This will allow to also add new features to the bot should you wish to do so. [Click here for step-by-step guide.](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+
+After forking the repo and cloning it to your local computer you will now have to login with an existing discord account or create a new one via [discord dev portal](https://discord.com/developers/).
+
+Once you've logged, in you will have access to the Navigation bar that directs you to your apps,teams, a debugger and the documentation to creating an app for discord.
+
+Before you start working on or running the project locally you must first create a bot for your server in the discord dev portal.
+
+To do that click on the `Applications` tab and then `New Application`. Add a name for your bot and click `create`. You should now see the General Information page that allows you to edit the application's name, add a description and change its avatar.
+
+===
+**_ This section is important so pay attention. _**
+
+Navigate to the Bot tab and you will see settings for your bot. Under the username you will see a button `Reset Token`. This will generate a token for your bot that is essentially its password to login to discord. It is vital that is kept secret so that someone else is unable to perform malicious acts with it.
+
+# The token should look like this: `NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I` (this token is just a dummy!)
+
+Now that you have setup your bot application, you will need to invite it to your server. To do that, navigate to the `URL Generator` in the `OAuth2` tab.
+
+For scopes, select:
+
+- bot
+- application.commands
+
+For permissions, select:
+(_you're free to add more permissions to expand on the project_)
+
+Under General permissions:
+
+- Read Messages/ View Channels
+
+Under Text permissions
+
+- Send Messages
+- Read Message History
+- Manage Messages
+- Use Slash Commands
+
+_More info about permissions can be found [here](https://discord.com/developers/docs/topics/permissions)._
+
+At the bottom of the page you'll see a generated url for your bot. Copy the url and paste it into your browser.
+
 ## Contributions
 
 ===
