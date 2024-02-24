@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 
+// test command; type /user in discord chat box to get the response
+//`This command was run by 'username', who joined on 'join date'.`
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("user")

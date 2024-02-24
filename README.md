@@ -60,6 +60,10 @@ Once, you've created an api key, return to the discord dev portal to find your c
 
 After that you can run `node deploy-commands.js` to load the bot's commands and finally run `node index.js` to start the bot. If everything is running correctly you will see a console message `Ready! Logged in as "bot name"`.
 
+## Adding Features
+
+Whenever you add a new command, make sure the file is created in the commands folder otherwise the deploy-commnds.js script will not be able to find it. You also must run the script for every newly created or updated command.
+
 ## Contributions
 
 [@Phoenix_Smart](https://github.com/RayFFH)

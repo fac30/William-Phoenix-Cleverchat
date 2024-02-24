@@ -10,7 +10,6 @@ const {
 const { config } = require("dotenv");
 const { Channel } = require("node:diagnostics_channel");
 
-
 config(); // Load environment variables from .env file
 
 // Create a new client instance
@@ -50,6 +49,10 @@ for (const folder of commandFolders) {
   }
 }
 
+// Retrieve all event files from the events folder.
+// Similar to above,read the files and load each one individually.
+// The Client class extends the node EventEmitter class to allow the use of the on and once methods to register event listeners.
+
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
   .readdirSync(eventsPath)
@@ -67,10 +70,3 @@ for (const file of eventFiles) {
 
 // Log in to Discord with your client's token from the environment variable
 client.login(process.env.DISCORD_TOKEN);
-
-
-
-
-
-
-
