@@ -1,5 +1,7 @@
 const { Events } = require("discord.js");
 
+// Listener for the client event: interactionCreate, that will execute code when the bot receives an interaction.
+
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
@@ -16,6 +18,7 @@ module.exports = {
     try {
       await command.execute(interaction);
     } catch (error) {
+      // catch block when there is an error running the command or it takes too long to run
       console.error(error);
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp({
