@@ -14,7 +14,7 @@ const openai = new OpenAI({
 });
 
 
-const conversationHistory = [];
+const conversationHistories = [];
 
 
 module.exports = {
@@ -28,6 +28,7 @@ module.exports = {
       
         async execute(interaction) {
           console.log('Raw Interaction Data:', interaction.toJSON());
+          var userID = interaction.user.id;
           
           //Ensures that the interaction is a command
 
@@ -46,9 +47,14 @@ module.exports = {
           try {
             //Defers user input allowing for OpenAI to take longer than 3 seconds to respond
             await interaction.deferReply();
+
+            if (!conversationHistories[userID]) {
+              conversationHistories[userID] = [];
+            }
+            const userConversationHistory = conversationHistories[userID];
             // Send the user's input to the OpenAIAPI
             //Array containing the chat history
-            const messages = [{ role: 'user', content: conversationHistory.join('\n') + '\n' + userMessage }];
+            const messages = [{ role: 'user', content: userConversationHistory.join('\n') + '\n' + userMessage }];
 
               const response = await openai.chat.completions.create({
                 messages: messages,
@@ -61,7 +67,7 @@ module.exports = {
             const botResponse2 = response.choices[0].message.content;
 
             //Adds String into conversation array
-            conversationHistory.push(botResponse2);
+            userConversationHistory.push(botResponse2);
         
             // Reply to the user with the generated response
             await interaction.editReply(botResponse);
