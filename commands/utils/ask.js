@@ -44,13 +44,16 @@ module.exports = {
             //Defers user input allowing for OpenAI to take longer than 3 seconds to respond
             await interaction.deferReply();
 
-            if (!conversationHistories[userID]) {
-              conversationHistories[userID] = [];
+          if (!Array.isArray(conversationHistories[userID])) {
+            conversationHistories[userID] = [];
+        }
+
+          const messages = [
+            {
+                role: 'user',
+                content: conversationHistories[userID].map(entry => entry.content).join('\n') + '\n' + userMessage
             }
-            const userConversationHistory = conversationHistories[userID];
-            // Send the user's input to the OpenAIAPI
-            //Array containing the chat history
-            const messages = [{ role: 'user', content: userConversationHistory.join('\n') + '\n' + userMessage }];
+        ];
 
               const response = await openai.chat.completions.create({
                 messages: messages,
@@ -63,8 +66,17 @@ module.exports = {
             const botResponse2 = response.choices[0].message.content;
 
             //Adds String into conversation array
-            userConversationHistory.push(botResponse2);
-        
+            conversationHistories[userID].push({
+              role: 'user',
+              content: userMessage
+          });
+          
+            conversationHistories[userID].push({
+              role: 'bot',
+              content: botResponse2
+          });
+          
+            console.log(conversationHistories);
             // Reply to the user with the generated response
             await interaction.editReply(botResponse);
           } catch (error) {
