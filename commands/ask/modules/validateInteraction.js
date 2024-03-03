@@ -1,12 +1,12 @@
 const validateInteraction = (interaction) => {
-  if (interaction.isCommand()) {
+  if (!interaction.isCommand()) {
     return false;
   }
   if (interaction.replied) {
-    return true;
+    return false;
   }
   if (interaction.deferred) {
-    return true;
+    return false;
   }
   return interaction;
 };
