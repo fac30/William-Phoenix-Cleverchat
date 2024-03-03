@@ -10,6 +10,7 @@ const fetchMessage = async (messages) => {
     messages: messages,
     model: "gpt-3.5-turbo",
   });
+  console.log(res);
   return res;
 }
 
@@ -19,7 +20,7 @@ const createMessage = async (messages, fn) => {
     if (response.ok) {
       return response.choices[0];
     } else {
-      throw new Error(response.error());
+      throw new Error(response.error);
     }
   } catch (error) {
     console.error(`Error fetching response from OpenAI: ${error.message}`);
