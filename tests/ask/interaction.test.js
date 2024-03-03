@@ -1,26 +1,23 @@
 const assert = require('assert');
 const { test } = require('node:test');
+const validateInteraction  = require("../../commands/ask/modules/validateInteraction")
 
-
-mockInteraction = require("../mocks/mockdata");
+const {interactionMock, deferredMock, falseCommandMock, repliedMock} = require("../mocks/mockdata");
 
 
 test('Validate Interaction Test', () => {
-    const validateInteraction = (interaction) => {
-      if (interaction.replied) {
-        return true;
-      } else if (interaction.deferred) {
-        return true;
-      } else if (interaction.isCommand()) {
-        return true;
-      }
-    
-      return false; // If none of the conditions are met
-    };
-  
- 
-    const isValidInteraction = validateInteraction(mockInteraction);
+
+    console.log(interactionMock)
+
+    const isValidInteraction = validateInteraction(interactionMock);
+   
   
     // Assertion to check if the interaction is valid
-    assert.ok(isValidInteraction, 'Interaction is not valid');
+
+    console.log(isValidInteraction)
+    console.log(isValidInteraction)
+    assert.ok(isValidInteraction, interactionMock);
+    
+    
+    
   });
