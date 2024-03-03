@@ -7,17 +7,26 @@ const {interactionMock, deferredMock, falseCommandMock, repliedMock} = require("
 
 test('Validate Interaction Test', () => {
 
-    console.log(interactionMock)
-
     const isValidInteraction = validateInteraction(interactionMock);
-   
-  
     // Assertion to check if the interaction is valid
+    assert.strictEqual(isValidInteraction, interactionMock);
+   
+  });
+  test('Deferred interaction Test', () => {
 
-    console.log(isValidInteraction)
-    console.log(isValidInteraction)
-    assert.ok(isValidInteraction, interactionMock);
+    const isValiddeferred = validateInteraction(deferredMock);
+    assert.strictEqual(isValiddeferred, false);
+
+  });
+  test('False Command Test', () => {
+
+    const isValidfalsecommand = validateInteraction(falseCommandMock);
+    assert.strictEqual(isValidfalsecommand, false);
     
-    
+  });
+  test('RepliedMock interaction Test', () => {
+
+    const isValidrepliedMock = validateInteraction(repliedMock);
+    assert.strictEqual(isValidrepliedMock, false);
     
   });

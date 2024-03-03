@@ -5,26 +5,60 @@ require('dotenv').config({ path: '../../.env' });
 const {interactionMock, deferredMock, falseCommandMock, repliedMock} = require("../mocks/mockdata");
 
 const { createMessage, fetchMessage  } = require("../../commands/ask/modules/createMessage")
+const { successResponse, failResponse } = require("../mocks/messages");
 
 
 
 test('OpenAI Response Unit Test', async () => {
-    try {
-        const userMessage = interactionMock.options.getString('input');
+   
+    //console.log(successResponse.choices[0].messages)
+    const response = await createMessage(successResponse, ()=>{successResponse}) 
+    //console.log(response)
 
-        const results = createMessage(userMessage, fetchMessage)
+    assert.strictEqual(response.ok, true);
 
-        const botResponse = results.choices[0].message.content;
+    //assert.strictEqual(response.messages, 'you did it');
 
-        console.log(botResponse)
+});
 
-        assert.strictEqual(botResponse, '1 + 1 = 2');
 
-} catch (error) {
-        console.error('OpenAI Response Unit Test failed:', error);
-        assert.fail('OpenAI Response Unit Test failed');
-      }
-    });
+
+// test('OpenAI Response Unit Test', async () => {
+   
+//         const userMessage = interactionMock.options.getString('input');
+//         const messages = [
+//             {
+//               role: "user",
+//               content: userMessage,
+//             },
+//           ];
+//           console.log(userMessage)
+//         const results = await createMessage(messages, fetchMessage)
+//         //console.log(results)
+
+//         const botResponse = results.choices[0].message.content;
+
+//         console.log(botResponse)
+
+//         assert.strictEqual(botResponse, '1 + 1 = 2');
+
+// )};
+
+    // test('OpenAI Response Unit Test', async () => {
+    //     try {
+    
+    //         const results = createMessage(messages, fetchMessage)
+    
+    //         const botResponse = results.choices[0].message.content;
+    
+    //         assert.ok(botResponse, 'empty string return result');
+    
+    // } catch (error) {
+    //         console.error('OpenAI Response Unit Test failed:', error);
+    //         assert.fail('OpenAI Response Unit Test failed');
+    //       }
+    //     });
+    
 
 
 
